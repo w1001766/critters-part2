@@ -34,7 +34,7 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Critter Simulator");
-		Scene scene = new Scene(new Group(), Params.world_height*40 + 240, Params.world_height*40);
+		Scene scene = new Scene(new Group(), Params.world_width*40 + 280, Params.world_height*40);
 		
 		// Defining the drop down for types of critters
 		final ComboBox critterType = new ComboBox();
@@ -113,7 +113,7 @@ public class Main extends Application{
 		Button fastBtn = new Button ("Fast");
 		
 		// Defining the Add button play stop animation
-		Button exitBtn = new Button ("Exit");
+		Button exitBtn = new Button (" Exit ");
 		// Defining the Add button play fast animation
 		Button resetBtn = new Button ("Reset");
 		
