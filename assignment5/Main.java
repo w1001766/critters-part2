@@ -196,7 +196,7 @@ public class Main extends Application{
 		stepBtn.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override 
 		    public void handle(ActionEvent e) {
-		    	critters_grid.getChildren().removeIf(Shape.class::isInstance);
+		    	critters_grid.getChildren().removeIf(Shape.class::isInstance);	// clear the grid_pane and redraw it
 		        Critter.worldTimeStep();
 		        Critter.displayWorld(critters_grid);
 		    }

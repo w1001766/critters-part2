@@ -16,6 +16,7 @@ import java.util.List;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -366,6 +367,97 @@ public abstract class Critter {
 			case SQUARE:
 				Rectangle rectangle = new Rectangle(40, 40);
 		        shape = rectangle;
+		        break;
+			case TRIANGLE:
+				Polygon triangle = new Polygon();
+				triangle.getPoints().addAll(new Double[] {
+					1.0, 1.0,
+					38.0, 1.0,
+					19.0, 30.0
+				});
+				shape = triangle;
+		        break;
+			case DIAMOND:
+				Polygon diamond = new Polygon();
+				diamond.getPoints().addAll(new Double[] {
+					19.0, 1.0,
+					38.0, 19.0,
+					19.0, 38.0,
+					1.0, 19.0
+				});
+				shape = diamond;
+		        break;
+			case STAR:
+				Polygon star = new Polygon();
+				double radius = 20.0;
+				star.getPoints().addAll(new Double[] {
+						1.0, 0.8 * radius,
+		                0.7 * radius, 0.8 * radius,
+		                radius, 1.0,
+		                1.3 * radius, 0.8 * radius,
+		                2 * radius - 1, 0.8 * radius,
+		                1.4 * radius, 1.3 * radius,
+		                1.6 * radius, 2 * radius - 1,
+		                radius, 1.6 * radius,
+		                0.4 * radius, 2 * radius-1,
+		                0.6 * radius, 1.3 * radius
+				});
+				shape = star;
+		        break;
+			default:
+				shape = null;
+			}
+			shape.setFill(c.viewColor());
+			shape.setStroke(c.viewOutlineColor());
+			pane.add(shape, c.x_coord, c.y_coord);
+		}
+		
+		for(Critter c: babies) {
+			Shape shape;
+			switch(c.viewShape()) {
+			case CIRCLE:
+				Circle circle = new Circle(20);
+		        shape = circle;
+		        break;
+			case SQUARE:
+				Rectangle rectangle = new Rectangle(40, 40);
+		        shape = rectangle;
+		        break;
+			case TRIANGLE:
+				Polygon triangle = new Polygon();
+				triangle.getPoints().addAll(new Double[] {
+					1.0, 1.0,
+					38.0, 1.0,
+					19.0, 30.0
+				});
+				shape = triangle;
+		        break;
+			case DIAMOND:
+				Polygon diamond = new Polygon();
+				diamond.getPoints().addAll(new Double[] {
+					19.0, 1.0,
+					38.0, 19.0,
+					19.0, 38.0,
+					1.0, 19.0
+				});
+				shape = diamond;
+		        break;
+			case STAR:
+				Polygon star = new Polygon();
+				double radius = 20.0;
+				star.getPoints().addAll(new Double[] {
+						1.0, 0.8 * radius,
+		                0.7 * radius, 0.8 * radius,
+		                radius, 1.0,
+		                1.3 * radius, 0.8 * radius,
+		                2 * radius - 1, 0.8 * radius,
+		                1.4 * radius, 1.2 * radius,
+		                1.6 * radius, 2 * radius - 1,
+		                radius, 1.6 * radius,
+		                0.4 * radius, 2 * radius-1,
+		                0.6 * radius, 1.2 * radius
+				});
+				shape = star;
 		        break;
 			default:
 				shape = null;

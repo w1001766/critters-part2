@@ -36,7 +36,11 @@ public class Critter4 extends Critter {
 	
 	// new for assignment5
 	@Override
-	public CritterShape viewShape() { return CritterShape.SQUARE; }
+	public CritterShape viewShape() { return CritterShape.STAR; }
+	@Override
+	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.RED; }
+	@Override
+	public javafx.scene.paint.Color viewOutlineColor() { return javafx.scene.paint.Color.BLACK; }
 	
 	public static String runStats(java.util.List<Critter> ron2s) {
 		int total_crits = 0;
