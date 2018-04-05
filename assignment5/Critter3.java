@@ -40,7 +40,7 @@ public class Critter3 extends Critter {
 	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.PINK; }
 	@Override
 	public javafx.scene.paint.Color viewOutlineColor() { return javafx.scene.paint.Color.BLACK; }
-	
+
 	public static String runStats(java.util.List<Critter> ron1s) {
 		int total_crits = 0;
 		int total_energy = 0;

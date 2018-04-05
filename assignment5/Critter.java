@@ -14,11 +14,15 @@ package assignment5;
 import java.lang.reflect.Constructor;
 import java.util.List;
 
+
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.shape.Polygon;
+
 
 public abstract class Critter {
 	/* NEW FOR PROJECT 5 */
@@ -58,6 +62,7 @@ public abstract class Critter {
 	static {
 		myPackage = Critter.class.getPackage().toString().split(" ")[1];
 	}
+
 	/**This method examines the location identified by the critter’s current 
 	 * coordinates and moving one or two positions (for steps = false or true respectively) 
 	 * in the indicated direction (recall direction 0 corresponds to moving along the x axis, 
@@ -129,6 +134,7 @@ public abstract class Critter {
 		
 		return null;
 	}
+
 	/* rest is unchanged from Project 4 */
 	
 	/* a one-character long string that visually depicts your critter in the ASCII interface */
@@ -226,6 +232,7 @@ public abstract class Critter {
 	 * @param offspring
 	 * @param direction
 	 */
+	
 	protected final void reproduce(Critter offspring, int direction) {
 		if(this.energy<Params.min_reproduce_energy) {	// only reproduce if parent has enough energy
 			return;

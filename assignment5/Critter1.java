@@ -29,9 +29,10 @@ public class Critter1 extends Critter {
 	@Override
 	public CritterShape viewShape() { return CritterShape.CIRCLE; }
 	@Override
-	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.YELLOW; }
+	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.AQUA; }
 	@Override
 	public javafx.scene.paint.Color viewOutlineColor() { return javafx.scene.paint.Color.BLACK; }
+
 	
 	public static String runStats(java.util.List<Critter> Critter1) {
 		int fight_Counts = 0;
@@ -71,4 +72,5 @@ public class Critter1 extends Critter {
 	public String toString () {
 		return "W";
 	}
+	
 }
