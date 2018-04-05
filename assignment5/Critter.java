@@ -14,6 +14,11 @@ package assignment5;
 import java.lang.reflect.Constructor;
 import java.util.List;
 
+import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+
 public abstract class Critter {
 	/* NEW FOR PROJECT 5 */
 	public enum CritterShape {
@@ -21,7 +26,7 @@ public abstract class Critter {
 		SQUARE,
 		TRIANGLE,
 		DIAMOND,
-		STAR
+		STAR		
 	}
 	
 	/* the default color is white, which I hope makes critters invisible by default
@@ -282,7 +287,27 @@ public abstract class Critter {
 		}
 	}
 	
-	public static void displayWorld(Object pane) {} 
+	public static void displayWorld(GridPane pane) {
+		for(Critter c: population) {
+			Shape shape;
+			switch(c.viewShape()) {
+			case CIRCLE:
+				Circle circle = new Circle(20);
+		        shape = circle;
+		        break;
+			case SQUARE:
+				Rectangle rectangle = new Rectangle(20, 20);
+		        shape = rectangle;
+		        break;
+			default:
+				shape = null;
+			}
+			shape.setFill(c.viewColor());
+			shape.setStroke(c.viewOutlineColor());
+			pane.add(shape, c.x_coord, c.y_coord);
+		}
+		
+	} 
 	/* Alternate displayWorld, where you use Main.<pane> to reach into your
 	   display component.
 	   // public static void displayWorld() {}

@@ -13,6 +13,8 @@ package assignment5;
  */
 
 import javafx.application.*;	// start()
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;		// Stage
 import javafx.scene.layout.*;	// FlowPane
 import javafx.scene.paint.Color;	
@@ -64,8 +66,11 @@ public class Main extends Application{
 		steps.setPrefColumnCount(5);
 		steps.getText();
 		
-		// Defining the Add button to add critters to the world 
+		// Defining the Go button to add critters to the world 
 		Button goBtn = new Button ("Go");
+		
+		// Defining the Go button to add critters to the world 
+		Button stepBtn = new Button ("Step");
 		
 		// Defining the Text Field for the seed
 		final TextField seed = new TextField();
@@ -126,6 +131,7 @@ public class Main extends Application{
 		function_grid.add(addBtn, 2, 0);
 		function_grid.add(steps, 0, 1);
 		function_grid.add(goBtn, 1, 1);
+		function_grid.add(stepBtn, 2, 1);
 		function_grid.add(seed, 0, 2);
 		function_grid.add(setBtn, 1, 2);
 		function_grid.add(statsType, 0, 3);
@@ -170,5 +176,24 @@ public class Main extends Application{
 		root.getChildren().add(top_layer);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
+		// Implement buttons
+		addBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override 
+			public void handle(ActionEvent e) {
+				String type = (String) critterType.getValue();
+				String count = (String) amount.getCharacters();
+			}
+		});
+		
+		stepBtn.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override 
+		    public void handle(ActionEvent e) {
+		        Critter.worldTimeStep();
+		        Critter.displayWorld(critters_grid);
+		    }
+		});
+		
+		
 	}
 }
