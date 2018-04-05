@@ -107,6 +107,7 @@ public class Main extends Application{
 		final Label label4 = new Label("Critter2: 17");
 		final Label label5 = new Label("Critter3: 5");
 		final Label label6 = new Label("Critter4: 1");
+		final Label warningTxt = new Label("");
 		
 		// Defining the Add button play slow animation
 		Button slowBtn = new Button ("Slow");
@@ -157,18 +158,10 @@ public class Main extends Application{
 		hb2.getChildren().add(resetBtn);
 		function_grid.add(hb1, 0, 10, 3, 1);
 		function_grid.add(hb2, 0, 11);
+		function_grid.add(warningTxt, 0, 12, 3, 1);
 
 		// instantiate the critters_grid
-		for(int i = 0; i < Params.world_height; i++) {
-            ColumnConstraints column = new ColumnConstraints(40);
-            critters_grid.getColumnConstraints().add(column);
-        }
-		for(int i = 0; i < Params.world_width; i++) {
-            RowConstraints row = new RowConstraints(40);
-            critters_grid.getRowConstraints().add(row);
-        }
-		
-		critters_grid.setStyle("-fx-background-color: azure; -fx-grid-lines-visible: true");
+		drawGrid(critters_grid);
 		
 		top_layer.getChildren().add(function_grid);
 		top_layer.getChildren().add(critters_grid);
@@ -182,18 +175,43 @@ public class Main extends Application{
 			@Override 
 			public void handle(ActionEvent e) {
 				String type = (String) critterType.getValue();
-				String count = (String) amount.getCharacters();
+				String count = amount.getText();
+				int count_int = 0;
+				if(!count.isEmpty()) {
+					count_int = Integer.parseInt(count);
+				}
+				for(int i = 0; i < count_int; i++) {
+					try {
+						Critter.makeCritter(type);
+					} catch (InvalidCritterException e1) {
+						warningTxt.setText("Undefined Critter");
+						warningTxt.setTextFill(Color.RED);
+					}
+				}
+				Critter.displayWorld(critters_grid);
 			}
+			
 		});
 		
 		stepBtn.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override 
 		    public void handle(ActionEvent e) {
+		    	critters_grid.getChildren().removeIf(Shape.class::isInstance);
 		        Critter.worldTimeStep();
 		        Critter.displayWorld(critters_grid);
 		    }
 		});
-		
-		
+	}
+	
+	protected void drawGrid(GridPane gp) {
+		for(int i = 0; i < Params.world_height; i++) {
+            ColumnConstraints column = new ColumnConstraints(40);
+            gp.getColumnConstraints().add(column);
+        }
+		for(int i = 0; i < Params.world_width; i++) {
+            RowConstraints row = new RowConstraints(40);
+            gp.getRowConstraints().add(row);
+        }	
+		gp.setStyle("-fx-background-color: azure; -fx-grid-lines-visible: true");
 	}
 }

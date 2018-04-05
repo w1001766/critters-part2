@@ -57,9 +57,77 @@ public abstract class Critter {
 	static {
 		myPackage = Critter.class.getPackage().toString().split(" ")[1];
 	}
-	
-	protected final String look(int direction, boolean steps) {return "";}
-	
+	/**This method examines the location identified by the critter’s current 
+	 * coordinates and moving one or two positions (for steps = false or true respectively) 
+	 * in the indicated direction (recall direction 0 corresponds to moving along the x axis, 
+	 * 1 corresponds to moving diagonally along both the x and y axes, etc.
+	 * 
+	 * @param direction
+	 * @param steps
+	 * @return
+	 */
+	protected final String look(int direction, boolean steps) {
+		this.energy -= Params.look_energy_cost;//pay the energy to look
+		int move;
+		int look_x = this.x_coord;
+		int look_y = this.y_coord;
+		if(steps == true) {
+			move = 2;
+		}
+		else {
+			move = 1;
+		}
+		switch(direction){
+		case 0:
+			look_x += move;
+			break;
+		case 1:
+			look_x += move;
+			look_y -= move;
+			break;
+		case 2:
+			look_y -= move;
+			break;
+		case 3:
+			look_y -= move;
+			look_x -= move;
+			break;
+		case 4:
+			look_x -= move;
+			break;
+		case 5:
+			look_x -= move;
+			look_y += move;
+			break;
+		case 6:
+			look_y += move;
+			break;
+		case 7:
+			look_x += move;
+			look_y += move;
+			break;
+		}
+		if (look_x < 0){
+			look_x += Params.world_width;
+		}
+		if (look_x > (Params.world_width - 1)){
+			look_x -= Params.world_width;
+		}
+		if (look_y < 0){
+			look_y += Params.world_height;
+		}
+		if (look_y > (Params.world_height - 1)){
+			look_y -= Params.world_height;
+		}
+		for(Critter critter : population){
+			if(critter.x_coord == look_x && critter.y_coord == look_y)
+				if(critter.getEnergy() >= 0){
+					return critter.toString();
+				}
+		}
+		
+		return null;
+	}
 	/* rest is unchanged from Project 4 */
 	
 	/* a one-character long string that visually depicts your critter in the ASCII interface */
@@ -296,7 +364,7 @@ public abstract class Critter {
 		        shape = circle;
 		        break;
 			case SQUARE:
-				Rectangle rectangle = new Rectangle(20, 20);
+				Rectangle rectangle = new Rectangle(40, 40);
 		        shape = rectangle;
 		        break;
 			default:
