@@ -14,6 +14,12 @@ package assignment5;
 import java.lang.reflect.Constructor;
 import java.util.List;
 
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 public abstract class Critter {
 	/* NEW FOR PROJECT 5 */
 	public enum CritterShape {
@@ -53,7 +59,72 @@ public abstract class Critter {
 		myPackage = Critter.class.getPackage().toString().split(" ")[1];
 	}
 	
-	protected final String look(int direction, boolean steps) {return "";}
+	protected final String look(int direction, boolean steps) {
+		this.energy -= Params.look_energy_cost;//pay the energy to look
+		int move;
+		int look_x = this.x_coord;
+		int look_y = this.y_coord;
+		if(steps == true) {
+			move = 2;
+		}
+		else {
+			move = 1;
+		}
+		switch(direction){
+		case 0:
+			look_x += move;
+			break;
+		case 1:
+			look_x += move;
+			look_y -= move;
+			break;
+		case 2:
+			look_y -= move;
+			break;
+		case 3:
+			look_y -= move;
+			look_x -= move;
+			break;
+		case 4:
+			look_x -= move;
+			break;
+		case 5:
+			look_x -= move;
+			look_y += move;
+			break;
+		case 6:
+			look_y += move;
+			break;
+		case 7:
+			look_x += move;
+			look_y += move;
+			break;
+		}
+		if (look_x < 0){
+			look_x += Params.world_width;
+		}
+		if (look_x > (Params.world_width - 1)){
+			look_x -= Params.world_width;
+		}
+		if (look_y < 0){
+			look_y += Params.world_height;
+		}
+		if (look_y > (Params.world_height - 1)){
+			look_y -= Params.world_height;
+		}
+		for(Critter critter : population){
+			if(critter.x_coord == look_x && critter.y_coord == look_y)
+				if(critter.getEnergy() >= 0){
+					return critter.toString();
+				}
+		}
+		
+		return null;
+	}
+		
+		
+	
+	
 	
 	/* rest is unchanged from Project 4 */
 	
@@ -152,6 +223,7 @@ public abstract class Critter {
 	 * @param offspring
 	 * @param direction
 	 */
+	
 	protected final void reproduce(Critter offspring, int direction) {
 		if(this.energy<Params.min_reproduce_energy) {	// only reproduce if parent has enough energy
 			return;
@@ -282,7 +354,32 @@ public abstract class Critter {
 		}
 	}
 	
-	public static void displayWorld(Object pane) {} 
+	public static void displayWorld(GridPane pane) {
+		/*for(int i = 0; i < Params.world_height; i++) {
+			for(int j = 0; j < Params.world_width; j++) {
+				pane.add(null, i, j);
+			}
+		}*/
+		for(Critter c: population) {
+			Shape shape;
+			switch(c.viewShape()) {
+			case CIRCLE:
+				Circle circle = new Circle(20);
+		        shape = circle;
+		        break;
+			case SQUARE:
+				Rectangle rectangle = new Rectangle(40, 40);
+		        shape = rectangle;
+		        break;
+			default:
+				shape = null;
+			}
+			shape.setFill(c.viewColor());
+			shape.setStroke(c.viewOutlineColor());
+			pane.add(shape, c.x_coord, c.y_coord);
+		}
+		
+	} 
 	/* Alternate displayWorld, where you use Main.<pane> to reach into your
 	   display component.
 	   // public static void displayWorld() {}

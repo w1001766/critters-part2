@@ -28,8 +28,8 @@ public class Critter2 extends Critter {
 	private boolean upgrade;
 	// new for assignment5
 	@Override
-	public CritterShape viewShape() { return CritterShape.SQUARE; }
-	
+	public CritterShape viewShape() { return CritterShape.CIRCLE; }
+	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.BEIGE; }
 	public static String runStats(java.util.List<Critter> Critter2) {
 		int fight_Counts = 0;
 		for(Critter c: Critter2) {

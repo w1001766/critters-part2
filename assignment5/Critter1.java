@@ -26,8 +26,8 @@ public class Critter1 extends Critter {
 	private int fightCount;
 	
 	// new for assignment5
-	@Override
-	public CritterShape viewShape() { return CritterShape.SQUARE; }
+	public CritterShape viewShape() { return CritterShape.CIRCLE; }
+	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.AQUA; }
 	
 	public static String runStats(java.util.List<Critter> Critter1) {
 		int fight_Counts = 0;
@@ -67,4 +67,5 @@ public class Critter1 extends Critter {
 	public String toString () {
 		return "W";
 	}
+	
 }
