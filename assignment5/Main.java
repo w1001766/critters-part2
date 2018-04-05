@@ -180,15 +180,52 @@ public class Main extends Application{
 				if(!count.isEmpty()) {
 					count_int = Integer.parseInt(count);
 				}
-				for(int i = 0; i < count_int; i++) {
-					try {
-						Critter.makeCritter(type);
-					} catch (InvalidCritterException e1) {
-						warningTxt.setText("Undefined Critter");
-						warningTxt.setTextFill(Color.RED);
-					}
+				if(count_int == 0) {
+					warningTxt.setText("Enter the amount of critters to add");
+					warningTxt.setTextFill(Color.RED);
 				}
-				Critter.displayWorld(critters_grid);
+				else if(type == null) {
+					warningTxt.setText("Select the type of Critter to add");
+					warningTxt.setTextFill(Color.RED);
+				}
+				else {
+					for(int i = 0; i < count_int; i++) {
+						try {
+							Critter.makeCritter(type);
+						} catch (InvalidCritterException e1) {
+							warningTxt.setText("Undefined Critter");
+							warningTxt.setTextFill(Color.RED);
+						}
+					}
+					Critter.displayWorld(critters_grid);
+					warningTxt.setText("Added " + count_int + " " + type + "s");
+					warningTxt.setTextFill(Color.GREEN);
+				}
+			}
+			
+		});
+		
+		goBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override 
+			public void handle(ActionEvent e) {
+				String count = steps.getText();
+				int count_int = 0;
+				if(!count.isEmpty()) {
+					count_int = Integer.parseInt(count);
+				}
+				if(count_int == 0) {
+					warningTxt.setText("Enter the steps to go");
+					warningTxt.setTextFill(Color.RED);
+				}
+				else {
+					for(int i = 0; i < count_int; i++) {
+						Critter.worldTimeStep();
+					}
+					critters_grid.getChildren().removeIf(Shape.class::isInstance);	// clear the grid_pane and redraw it
+					Critter.displayWorld(critters_grid);
+					warningTxt.setText(count_int + " steps were processed");
+					warningTxt.setTextFill(Color.GREEN);
+				}
 			}
 			
 		});
@@ -199,7 +236,30 @@ public class Main extends Application{
 		    	critters_grid.getChildren().removeIf(Shape.class::isInstance);	// clear the grid_pane and redraw it
 		        Critter.worldTimeStep();
 		        Critter.displayWorld(critters_grid);
+		        warningTxt.setText("Stepped Once");
+				warningTxt.setTextFill(Color.GREEN);
 		    }
+		});
+		
+		setBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override 
+			public void handle(ActionEvent e) {
+				String count = seed.getText();
+				int count_int = 0;
+				if(!count.isEmpty()) {
+					count_int = Integer.parseInt(count);
+				}
+				if(count_int == 0) {
+					warningTxt.setText("Enter a valid seed");
+					warningTxt.setTextFill(Color.RED);
+				}
+				else {
+					Critter.setSeed(count_int);
+					warningTxt.setText("New seed: " + count_int);
+					warningTxt.setTextFill(Color.GREEN);
+				}
+			}
+			
 		});
 	}
 	
