@@ -14,12 +14,20 @@ package assignment5;
 import java.lang.reflect.Constructor;
 import java.util.List;
 
+<<<<<<< HEAD
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+=======
+import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+
+>>>>>>> c7075632e944abbb9ba6cda33c4030cfcc48f1d2
 public abstract class Critter {
 	/* NEW FOR PROJECT 5 */
 	public enum CritterShape {
@@ -27,7 +35,7 @@ public abstract class Critter {
 		SQUARE,
 		TRIANGLE,
 		DIAMOND,
-		STAR
+		STAR		
 	}
 	
 	/* the default color is white, which I hope makes critters invisible by default
@@ -58,7 +66,19 @@ public abstract class Critter {
 	static {
 		myPackage = Critter.class.getPackage().toString().split(" ")[1];
 	}
+<<<<<<< HEAD
 	
+=======
+	/**This method examines the location identified by the critter’s current 
+	 * coordinates and moving one or two positions (for steps = false or true respectively) 
+	 * in the indicated direction (recall direction 0 corresponds to moving along the x axis, 
+	 * 1 corresponds to moving diagonally along both the x and y axes, etc.
+	 * 
+	 * @param direction
+	 * @param steps
+	 * @return
+	 */
+>>>>>>> c7075632e944abbb9ba6cda33c4030cfcc48f1d2
 	protected final String look(int direction, boolean steps) {
 		this.energy -= Params.look_energy_cost;//pay the energy to look
 		int move;
@@ -121,11 +141,14 @@ public abstract class Critter {
 		
 		return null;
 	}
+<<<<<<< HEAD
 		
 		
 	
 	
 	
+=======
+>>>>>>> c7075632e944abbb9ba6cda33c4030cfcc48f1d2
 	/* rest is unchanged from Project 4 */
 	
 	/* a one-character long string that visually depicts your critter in the ASCII interface */
@@ -355,11 +378,14 @@ public abstract class Critter {
 	}
 	
 	public static void displayWorld(GridPane pane) {
+<<<<<<< HEAD
 		/*for(int i = 0; i < Params.world_height; i++) {
 			for(int j = 0; j < Params.world_width; j++) {
 				pane.add(null, i, j);
 			}
 		}*/
+=======
+>>>>>>> c7075632e944abbb9ba6cda33c4030cfcc48f1d2
 		for(Critter c: population) {
 			Shape shape;
 			switch(c.viewShape()) {
