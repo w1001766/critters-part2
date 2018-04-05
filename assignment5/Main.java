@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.geometry.Insets;
 import javafx.scene.shape.*;
+import javafx.scene.text.Font;
 
 public class Main extends Application{
 	static HBox top_layer = new HBox();
@@ -108,6 +109,7 @@ public class Main extends Application{
 		final Label label5 = new Label("Critter3: 5");
 		final Label label6 = new Label("Critter4: 1");
 		final Label warningTxt = new Label("");
+		warningTxt.setFont(new Font("Arial", 15));
 		
 		// Defining the Add button play slow animation
 		Button slowBtn = new Button ("Slow");
